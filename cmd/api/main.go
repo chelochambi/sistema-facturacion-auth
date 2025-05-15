@@ -13,6 +13,7 @@ func main() {
 
 	router := gin.Default()
 	router.POST("/api/login", auth.LoginHandler)
+	router.POST("/api/auth/registro", auth.RegistrarUsuarioHandler)
 
 	log.Println("Servidor corriendo en http://localhost:8080")
 	router.Run(":8080")

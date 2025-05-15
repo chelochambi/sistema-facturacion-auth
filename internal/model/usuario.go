@@ -1,11 +1,11 @@
 package model
 
 type Usuario struct {
-	ID             int
-	Username       string
-	Email          string
-	NombreCompleto string
-	PasswordHash   string
+	ID             int    `json:"id"`
+	Username       string `json:"username"`
+	Email          string `json:"email"`
+	NombreCompleto string `json:"nombre"`
+	PasswordHash   string `json:"-"` // con "-" evitamos que se serialice
 }
 
 func (u *Usuario) Sanitizar() map[string]interface{} {
