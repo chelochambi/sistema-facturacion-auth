@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func EliminarUsuarioHandler(db *sql.DB) gin.HandlerFunc {
+func BloquearUsuarioHandler(db *sql.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		idStr := c.Param("id")
 		id, err := strconv.Atoi(idStr)
@@ -17,12 +17,12 @@ func EliminarUsuarioHandler(db *sql.DB) gin.HandlerFunc {
 			return
 		}
 
-		_, err = db.Exec(`UPDATE usuarios SET estado_id = 2 WHERE id = $1`, id)
+		_, err = db.Exec(`UPDATE usuarios SET estado_id = 3 WHERE id = $1`, id)
 		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Error al desactivar usuario"})
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Error al bloquear usuario"})
 			return
 		}
 
-		c.JSON(http.StatusOK, gin.H{"mensaje": "Usuario desactivado correctamente"})
+		c.JSON(http.StatusOK, gin.H{"mensaje": "Usuario bloqueado correctamente"})
 	}
 }

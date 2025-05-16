@@ -27,14 +27,14 @@ func main() {
 	// Ruta autenticación
 	api := router.Group("/api")
 	{
-		api.POST("/api/auth/login", auth.LoginHandler)
+		api.POST("/auth/login", auth.LoginHandler)
 		// Rutas de usuarios
 
 		api.GET("/usuarios", usuarios.ListarUsuariosHandler(db.DB))
 		api.GET("/usuarios/:id", usuarios.ObtenerUsuarioHandler(db.DB))
 		api.PUT("/usuarios/:id", usuarios.ActualizarUsuarioHandler(db.DB))
-		api.DELETE("/usuarios/:id", usuarios.EliminarUsuarioHandler(db.DB))
-		api.POST("/usuarios/", usuarios.CrearUsuarioHandler(db.DB))
+		api.DELETE("/usuarios/:id", usuarios.BloquearUsuarioHandler(db.DB))
+		api.POST("/usuarios/registro", usuarios.CrearUsuarioHandler(db.DB))
 
 		log.Println("Servidor corriendo en http://localhost:8080")
 	}
